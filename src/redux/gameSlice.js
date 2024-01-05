@@ -2,10 +2,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const generateRandomNumber = () => {
-  const randomNumber = Math.floor(1000 + Math.random() * 9000);
-  return randomNumber.toString();
-};
+  let randomNumber = "";
+  const uniqueDigits = new Set();
 
+  // İlk basamak (0 olamaz, 1-9 arası)
+  const firstDigit = Math.floor(Math.random() * 9) + 1;
+  randomNumber += firstDigit;
+  uniqueDigits.add(firstDigit);
+
+  // Diğer basamaklar (0-9 arası, farklı olmalı)
+  for (let i = 1; i < 4; i++) {
+    let digit;
+    do {
+      digit = Math.floor(Math.random() * 10);
+    } while (uniqueDigits.has(digit));
+
+    randomNumber += digit;
+    uniqueDigits.add(digit);
+  }
+
+  return randomNumber;
+};
 export const gameSlice = createSlice({
   name: "game",
   initialState: {

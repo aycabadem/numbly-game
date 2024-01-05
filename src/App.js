@@ -16,8 +16,16 @@ function App() {
 
   const handleGuessSubmit = () => {
     if (guessInput.length === 4 && /^\d+$/.test(guessInput)) {
-      dispatch(setUserGuess(guessInput));
-      dispatch(submitGuess());
+      const uniqueDigits = new Set(guessInput);
+
+      if (uniqueDigits.size === 4 && guessInput[0] !== "0") {
+        dispatch(setUserGuess(guessInput));
+        dispatch(submitGuess());
+      } else {
+        alert(
+          "Lütfen 4 farklı rakamdan oluşan bir sayı giriniz ve sayı 0 ile başlamamalıdır."
+        );
+      }
     } else {
       alert("Lütfen 4 basamaklı bir sayı giriniz.");
     }
@@ -30,19 +38,19 @@ function App() {
 
   return (
     <div>
-      <h1>4 Basamaklı Sayı Tahmin Oyunu</h1>
-      <p>Hedef Sayı: {targetNumber}</p>
+      <h1>4 Basamakli Sayi Tahmin Oyunu</h1>
+      <p>Hedef Sayi: {targetNumber}</p>
       <p>Tahmininiz: {userGuess || "-"}</p>
       <ul>
         {results.map((result, index) => (
           <li key={index}>
-            {index + 1}. Adım - Tahmin: {result.guess} - Toplar:
+            {index + 1}. Adim - Tahmin: {result.guess} - Toplar:
             {Array(result.blueDots).fill("🔵").join(" ")}{" "}
             {Array(result.redDots).fill("🔴").join(" ")}
           </li>
         ))}
       </ul>
-      <p>Adım Sayısı: {steps}</p>
+      <p>adim sayisi: {steps}</p>
       <input
         type="text"
         value={guessInput}
@@ -51,7 +59,7 @@ function App() {
         pattern="\d*"
       />
       <button onClick={handleGuessSubmit}>Tahmin Et</button>
-      <button onClick={handleResetGame}>Oyunu Sıfırla</button>
+      <button onClick={handleResetGame}>Oyunu sifirla</button>
     </div>
   );
 }
