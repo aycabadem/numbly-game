@@ -1,11 +1,17 @@
 // src/App.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserGuess, submitGuess, resetGame } from "./redux/gameSlice";
+import {
+  setUserGuess,
+  submitGuess,
+  resetGame,
+  setGameOver,
+} from "./redux/gameSlice";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const { targetNumber, userGuess, results, steps } = useSelector(
+  const { userGuess, results, steps, gameOver } = useSelector(
     (state) => state.game
   );
   const [guessInput, setGuessInput] = useState("");
@@ -21,36 +27,67 @@ function App() {
       if (uniqueDigits.size === 4 && guessInput[0] !== "0") {
         dispatch(setUserGuess(guessInput));
         dispatch(submitGuess());
+        setGuessInput("");
       } else {
         alert(
-          "Lütfen 4 farklı rakamdan oluşan bir sayı giriniz ve sayı 0 ile başlamamalıdır."
+          "Please enter a number consisting of 4 different digits and the number must not start with 0."
         );
       }
     } else {
-      alert("Lütfen 4 basamaklı bir sayı giriniz.");
+      alert("Please enter a 4 digit number");
     }
   };
 
   const handleResetGame = () => {
     dispatch(resetGame());
     setGuessInput("");
+    dispatch(setGameOver(false));
   };
-
+  if (gameOver) {
+    // return (
+    //   <div className="container">
+    //     <h1>Game Over!</h1>
+    //     <p>Congratulations, You guessed the correct number in {steps} steps!</p>
+    //     <button onClick={handleResetGame}>Play Again</button>
+    //   </div>
+    // );
+    return (
+      <div className="container">
+        <h1>Oyun Bitti!</h1>
+        <p>
+          Tebrikler, {steps} adımda sayıyı doğru tahmin ettiniz! İşte
+          tahminleriniz:
+        </p>
+        <ul>
+          {results.map((result, index) => (
+            <li key={index}>
+              {index + 1}. Adim - Tahmin: {result.guess} - Toplar:
+              {Array(result.blueDots).fill("🔵").join(" ")}{" "}
+              {Array(result.redDots).fill("🔴").join(" ")}
+            </li>
+          ))}
+        </ul>
+        <button className="button-reset" onClick={handleResetGame}>
+          Yeniden Oyna
+        </button>
+      </div>
+    );
+  }
   return (
-    <div>
-      <h1>4 Basamakli Sayi Tahmin Oyunu</h1>
-      <p>Hedef Sayi: {targetNumber}</p>
-      <p>Tahmininiz: {userGuess || "-"}</p>
+    <div className="container">
+      <h1>4 Digit Number Guessing Game</h1>
+      {/* <p>Target Number: {targetNumber}</p> */}
+      <p>Your guess: {userGuess || "-"}</p>
       <ul>
         {results.map((result, index) => (
           <li key={index}>
-            {index + 1}. Adim - Tahmin: {result.guess} - Toplar:
+            {index + 1}. Step - Your Guess: {result.guess} - Toplar:
             {Array(result.blueDots).fill("🔵").join(" ")}{" "}
             {Array(result.redDots).fill("🔴").join(" ")}
           </li>
         ))}
       </ul>
-      <p>adim sayisi: {steps}</p>
+      <p>Number of Steps: {steps}</p>
       <input
         type="text"
         value={guessInput}
@@ -58,8 +95,10 @@ function App() {
         maxLength={4}
         pattern="\d*"
       />
-      <button onClick={handleGuessSubmit}>Tahmin Et</button>
-      <button onClick={handleResetGame}>Oyunu sifirla</button>
+      <button onClick={handleGuessSubmit}>Quess</button>
+      <button className="button-reset" onClick={handleResetGame}>
+        Reset The Game
+      </button>
     </div>
   );
 }

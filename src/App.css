@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
-}
+/* src/styles/App.css */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+
+
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  background-color: #af80c2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  color: #fff; /* Koyu yeşil renkte başlık metni */
+}
+
+p {
+  color: #333; /* Gri renkte normal metin */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 10px; /* Butonlar arasına boşluk ekleniyor */
+  background-color: #fff;
+  color: #000; /* Beyaz renkte buton metni */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+ 
+}
+
+button:hover {
+  background-color: #9551b0;
+}
+
+.button-reset {
+  background-color: #fff; /* Kırmızı renkte sıfırlama butonu */
+}
+
+.button-reset:hover {
+  background-color: #9551b0;
 }

@@ -20,7 +20,7 @@ const generateRandomNumber = () => {
     randomNumber += digit;
     uniqueDigits.add(digit);
   }
-
+  console.log(randomNumber);
   return randomNumber;
 };
 export const gameSlice = createSlice({
@@ -30,6 +30,7 @@ export const gameSlice = createSlice({
     userGuess: "",
     results: [], // Tüm tahminleri ve sonuçları tutan dizi
     steps: 0,
+    gameOver: false,
   },
   reducers: {
     setUserGuess: (state, action) => {
@@ -45,12 +46,18 @@ export const gameSlice = createSlice({
       state.results.push({ guess: state.userGuess, blueDots, redDots });
       state.userGuess = "";
       state.steps += 1;
+      if (blueDots === 4) {
+        state.gameOver = true;
+      }
     },
     resetGame: (state) => {
       state.targetNumber = generateRandomNumber();
       state.userGuess = "";
       state.results = [];
       state.steps = 0;
+    },
+    setGameOver: (state, action) => {
+      state.gameOver = action.payload;
     },
   },
 });
@@ -97,5 +104,6 @@ const calculateDots = (result, targetNumber, userGuess) => {
   return { blueDots, redDots };
 };
 
-export const { setUserGuess, submitGuess, resetGame } = gameSlice.actions;
+export const { setUserGuess, submitGuess, resetGame, setGameOver } =
+  gameSlice.actions;
 export default gameSlice.reducer;
