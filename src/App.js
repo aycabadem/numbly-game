@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,9 +10,7 @@ import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const { userGuess, results, steps, gameOver } = useSelector(
-    (state) => state.game
-  );
+  const { results, steps, gameOver } = useSelector((state) => state.game);
   const [guessInput, setGuessInput] = useState("");
 
   const handleInputChange = (e) => {
@@ -53,22 +50,22 @@ function App() {
     // );
     return (
       <div className="container">
-        <h1>Oyun Bitti!</h1>
+        <h1>Game Over!</h1>
         <p>
-          Tebrikler, {steps} adımda sayıyı doğru tahmin ettiniz! İşte
-          tahminleriniz:
+          Congratulations! You guessed the number correctly in {steps} steps!
+          Here is your guesses:
         </p>
         <ul>
           {results.map((result, index) => (
             <li key={index}>
-              {index + 1}. Adim - Tahmin: {result.guess} - Toplar:
+              {index + 1}. Step - Quess: {result.guess} - Balls:
               {Array(result.blueDots).fill("🔵").join(" ")}{" "}
               {Array(result.redDots).fill("🔴").join(" ")}
             </li>
           ))}
         </ul>
         <button className="button-reset" onClick={handleResetGame}>
-          Yeniden Oyna
+          Play Again
         </button>
       </div>
     );
@@ -77,11 +74,12 @@ function App() {
     <div className="container">
       <h1>4 Digit Number Guessing Game</h1>
       {/* <p>Target Number: {targetNumber}</p> */}
-      <p>Your guess: {userGuess || "-"}</p>
+      {/* <p>Your guess: {userGuess || "-"}</p> */}
+
       <ul>
         {results.map((result, index) => (
           <li key={index}>
-            {index + 1}. Step - Your Guess: {result.guess} - Toplar:
+            {index + 1}. Step - Your Guess: {result.guess} - Balls:
             {Array(result.blueDots).fill("🔵").join(" ")}{" "}
             {Array(result.redDots).fill("🔴").join(" ")}
           </li>

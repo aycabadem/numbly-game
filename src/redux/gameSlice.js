@@ -1,16 +1,13 @@
-// src/redux/gameSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const generateRandomNumber = () => {
   let randomNumber = "";
   const uniqueDigits = new Set();
 
-  // İlk basamak (0 olamaz, 1-9 arası)
   const firstDigit = Math.floor(Math.random() * 9) + 1;
   randomNumber += firstDigit;
   uniqueDigits.add(firstDigit);
 
-  // Diğer basamaklar (0-9 arası, farklı olmalı)
   for (let i = 1; i < 4; i++) {
     let digit;
     do {
@@ -28,7 +25,7 @@ export const gameSlice = createSlice({
   initialState: {
     targetNumber: generateRandomNumber(),
     userGuess: "",
-    results: [], // Tüm tahminleri ve sonuçları tutan dizi
+    results: [],
     steps: 0,
     gameOver: false,
   },
@@ -91,12 +88,11 @@ const calculateDots = (result, targetNumber, userGuess) => {
     }
   }
 
-  // Yanlış konumda olanları bul
   for (let i = 0; i < targetDigits.length; i++) {
     const foundIndex = userDigits.indexOf(targetDigits[i]);
     if (foundIndex !== -1) {
       redDots += 1;
-      // Kullanılan rakamı işaretle
+
       userDigits[foundIndex] = "Y";
     }
   }
