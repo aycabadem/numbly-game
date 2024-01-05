@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/numbly-game/static/css/main.d337ee65.css",
+    "main.js": "/numbly-game/static/js/main.2f4eb945.js",
+    "index.html": "/numbly-game/index.html",
+    "main.d337ee65.css.map": "/numbly-game/static/css/main.d337ee65.css.map",
+    "main.2f4eb945.js.map": "/numbly-game/static/js/main.2f4eb945.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d337ee65.css",
+    "static/js/main.2f4eb945.js"
+  ]
+}
