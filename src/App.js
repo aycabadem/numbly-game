@@ -7,6 +7,7 @@ import {
   setGameOver,
 } from "./redux/gameSlice";
 import "./App.css";
+import BasicTooltip from "./Tooltip";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,7 +73,9 @@ function App() {
   }
   return (
     <div className="container">
-      <h1>4 Digit Number Guessing Game</h1>
+      <h1>
+        4 Digit Number Guessing Game <BasicTooltip />
+      </h1>
       {/* <p>Target Number: {targetNumber}</p> */}
       {/* <p>Your guess: {userGuess || "-"}</p> */}
 
