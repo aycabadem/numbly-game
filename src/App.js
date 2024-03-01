@@ -58,7 +58,7 @@ function App() {
         <ul>
           {results.map((result, index) => (
             <li key={index}>
-              {index + 1}. Step - Quess: {result.guess} - Balls:
+              {index + 1}. Step - Guess: {result.guess} - Balls:
               {Array(result.blueDots).fill("🔵").join(" ")}{" "}
               {Array(result.redDots).fill("🔴").join(" ")}
             </li>
@@ -80,7 +80,7 @@ function App() {
         {results.map((result, index) => (
           <li key={index}>
             {index + 1}. Step - Your Guess: {result.guess} - Balls:
-            {Array(result.blueDots).fill("🔵").join(" ")}{" "}
+            {Array(result.blueDots).fill("🔵").join(" ")}
             {Array(result.redDots).fill("🔴").join(" ")}
           </li>
         ))}
@@ -93,7 +93,7 @@ function App() {
         maxLength={4}
         pattern="\d*"
       />
-      <button onClick={handleGuessSubmit}>Quess</button>
+      <button onClick={handleGuessSubmit}>Guess</button>
       <button className="button-reset" onClick={handleResetGame}>
         Reset The Game
       </button>
