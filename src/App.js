@@ -60,7 +60,8 @@ function App() {
           {results.map((result, index) => (
             <li key={index}>
               {index + 1}. Step - Guess: {result.guess} - Balls:
-              {Array(result.blueDots).fill("🔵").join(" ")}{" "}
+              {Array(result.blueDots).fill("🔵").join(" ")}
+              {result.blueDots ? " " : ""}
               {Array(result.redDots).fill("🔴").join(" ")}
             </li>
           ))}
@@ -84,6 +85,7 @@ function App() {
           <li key={index}>
             {index + 1}. Step - Your Guess: {result.guess} - Balls:
             {Array(result.blueDots).fill("🔵").join(" ")}
+            {result.blueDots ? " " : ""}
             {Array(result.redDots).fill("🔴").join(" ")}
           </li>
         ))}
